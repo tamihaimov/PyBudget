@@ -1,0 +1,21 @@
+
+<b>User Information</b>
+{% if user %}
+    <p>Email: {{  user.userName }} </p>
+    <p>First Name: {{ user.firstName }} </p>
+    <p>Last Name: {{ user.lastName }} </p>
+     {% if default_account.isDefault %}
+          <p>Default Account: {{ default_account.accountID }} </p>
+     {% else %}
+         <p>No default account </p>
+     {% endif %}
+    <hr>
+    <ul>
+    <b>Accounts</b>
+    {% for account in accounts %}
+        <li> {{ account.accountID }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No user found</p>
+{% endif %}

@@ -1,0 +1,19 @@
+
+<b> Hello {{ user.firstName }}!</b>
+<hr>
+{% if default_account %}
+  {% for account in default_account %}
+   <b>{{ account.accountID }}</b>
+      <p>Budget: {{ account.accountID.budget }} </p>
+      <p>Reset Day: {{ account.accountID.resetDate }} </p>
+      <hr>
+      <ul>
+          <li><a href="{% url 'budgetApp:userSettings' account.userID.id %}">Settings</a></li>
+          <li><a href="{% url 'budgetApp:transaction' account.id %}">Add Transaction</a></li>
+          <li><a href="{% url 'budgetApp:history' account.userID.id %}">View Account History</a></li>
+          <li><a href="{% url 'budgetApp:statistics' account.userID.id %}">View Account Statistics</a></li>
+      </ul>
+   {% endfor %}
+{% else %}
+    <p>No default account</p>
+{% endif %}
