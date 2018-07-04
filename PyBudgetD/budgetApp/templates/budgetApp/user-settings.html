@@ -10,12 +10,36 @@
          <p>No default account </p>
      {% endif %}
     <hr>
-    <ul>
     <b>Accounts</b>
-    {% for account in accounts %}
-        <li> {{ account.accountID }}</li>
+    <table>
+        <tr>
+            <th>Account</th>
+            <th>Permission</th>
+            <th>Balance</th>
+            <th>Actions</th>
+        </tr>
+        {% for account in accounts %}
+            <tr>
+                <th>{{ account.accountID }}</th>
+                <th>{{ account.permissionID}}</th>
+                <th>{{ account.accountID.balance}}</th>
+                <th>
+                    {% if account.permissionID.id == 1 %}
+                        <a href="{% url 'budgetApp:accountSettings' account.id %}">Edit</a>
+                    {% endif %}
+                    <a href="{% url 'budgetApp:history' account.id %}">View</a>
+                </th>
+
+            </tr>
     {% endfor %}
-    </ul>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Add</th>
+            </tr>
+
+    </table>
 {% else %}
     <p>No user found</p>
 {% endif %}

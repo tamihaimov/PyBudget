@@ -1,0 +1,27 @@
+<h1>Transaction for {{  user_account.accountID }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'budgetApp:addTransaction' user_account.id %}" method="post">
+{% csrf_token %}
+    <input type="date" name="date" id="date"/>
+    <label>Date:</label><br/>
+    <label>Envelope:</label>
+    {% for envelope in envelopes %}
+        <input type="radio" name="envelope" id="envelope{{ forloop.counter }}" value="{{ envelope.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ envelope.envelopeName }}</label><br />
+    {% endfor %}
+    <input type="radio" name="type" id="type1" value=1 />
+     <label>Expense</label>
+    <input type="radio" name="type" id="type2" value=2 />
+     <label>Income</label><br />
+    <input type="text" name="description" id="description"/>
+    <label>Description:</label><br/>
+    <input type="number" name="sum" id="sum"/>
+    <label>Sum:</label><br/>
+    <input type="text" name="comment" id="comment"/>
+    <label>Comment:</label><br/>
+    <input type="submit" value="Save" />
+</form>
+
+

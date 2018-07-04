@@ -15,6 +15,8 @@ urlpatterns = [
     path('account/<int:user_account_id>/', views.accountSettings, name='accountSettings'),
     # ex: /budgetApp/transaction/1515/
     path('transaction/<int:user_account_id>/', views.transaction, name='transaction'),
+    # ex: /budgetApp/transaction/1515/
+    path('addTransaction/<int:user_account_id>/', views.addTransaction, name='addTransaction'),
     # ex: /budgetApp/history/1515/
     path('history/<int:user_account_id>/', views.history, name='history'),
     # ex: /budgetApp/statistics/1515/

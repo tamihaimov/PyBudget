@@ -18,6 +18,14 @@ class Accounts (models.Model):
 
     def __str__(self):
         return self.accountName
+    
+    def calc_balance (self):
+        envelopes = self.envelopes_set.all()
+        balance = 0
+        for envelope in envelopes:
+            balance += envelope.currentSum
+        return balance
+    balance = property(calc_balance)
 
 
 class Categories (models.Model):

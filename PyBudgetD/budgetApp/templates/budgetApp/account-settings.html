@@ -1,0 +1,67 @@
+
+<b>Account Information</b>
+{% if user_account %}
+    <p>Name: {{  user_account.accountID }} </p>
+    <p>Budget: {{ user_account.accountID.budget }} </p>
+    <p>Current Balance: {{ user_account.accountID.balance }} </p>
+    <p>Reset Day: {{ user_account.accountID.resetDate }} </p>
+    <hr>
+    <b>Envelopes</b>
+    <table>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Budget</th>
+            <th>Current Balance</th>
+            <th>Actions</th>
+        </tr>
+        {% for envelope in envelopes %}
+            <tr>
+                <th>{{ envelope.envelopeName }}</th>
+                <th>{{ envelope.categoryID }}</th>
+                <th>{{ envelope.envelopeBudget }}</th>
+                <th>{{ envelope.currentSum }}</th>
+                <th> </th>
+            </tr>
+    {% endfor %}
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Add</th>
+            </tr>
+    </table>
+    <hr>
+    <b>Associated Users</b>
+    {% if user_account.permissionID.id == 1 %}
+        <table>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Budget</th>
+            <th>Current Balance</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in other_users %}
+            <tr>
+                <th>{{ user.userID.userName }}</th>
+                <th>{{ user.userID.firstName }}</th>
+                <th>{{ user.userID.lastName }}</th>
+                <th>{{ user.permissionID }}</th>
+                <th> </th>
+            </tr>
+        {% endfor %}
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>Add</th>
+            </tr>
+        </table>
+    {% else %}
+        <p>No permission to see other users</p>
+    {% endif %}
+
+{% else %}
+    <p>No account found</p>
+{% endif %}
