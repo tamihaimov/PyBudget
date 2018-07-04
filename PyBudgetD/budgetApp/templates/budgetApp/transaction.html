@@ -9,8 +9,9 @@
     <label>Envelope:</label>
     {% for envelope in envelopes %}
         <input type="radio" name="envelope" id="envelope{{ forloop.counter }}" value="{{ envelope.id }}" />
-        <label for="choice{{ forloop.counter }}">{{ envelope.envelopeName }}</label><br />
-    {% endfor %}
+        <label for="choice{{ forloop.counter }}">{{ envelope.envelopeName }}</label>
+    {% endfor %}<br/>
+    <label>Type:</label>
     <input type="radio" name="type" id="type1" value=1 />
      <label>Expense</label>
     <input type="radio" name="type" id="type2" value=2 />
