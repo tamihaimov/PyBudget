@@ -61,7 +61,10 @@ def addTransaction(request, user_account_id):
 
 
 def history(request, user_account_id):
-    return HttpResponse("Got to history page. hurray!")
+    user_account = get_object_or_404(UserAccounts, pk=user_account_id)
+    transactions = user_account.accountID.activitylogs_set.order_by('date').all()
+    context = {'user_account': user_account, 'transactions': transactions}
+    return render(request, 'budgetApp/history.html', context)
 
 
 def statistics(request, user_account_id):

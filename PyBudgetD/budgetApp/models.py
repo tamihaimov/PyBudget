@@ -76,6 +76,11 @@ class ActivityLogs (models.Model):
     def __str__(self):
         return self.description + " " + str(self.sum)
 
+    def typeToString (self):
+        if self.type == 1:
+            return "Expense"
+        return "Income"
+    typeStr = property(typeToString)
 
 class ScheduledTransactions (models.Model):
     userID = models.ForeignKey(Users, on_delete=models.CASCADE)

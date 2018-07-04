@@ -1,0 +1,26 @@
+
+<b>Transaction History For Account: {{ user_account.accountID }} </b>
+<table>
+    <th>Date</th>
+    <th>User</th>
+    <th>Envelope</th>
+    <th>Category</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Sum</th>
+    <th>Comment</th>
+        </tr>
+        {% for transaction in transactions %}
+            <tr>
+                <th>{{ transaction.date }}</th>
+                <th>{{ transaction.userID }}</th>
+                <th>{{ transaction.envelopeID }}</th>
+                <th>{{ transaction.envelopeID.categoryID }}</th>
+                <th>{{ transaction.typeStr }}</th>
+                <th>{{ transaction.description }}</th>
+                <th>{{ transaction.sum }}</th>
+                <th>{{ transaction.comments }}</th>
+            </tr>
+    {% endfor %}
+</table>
+
