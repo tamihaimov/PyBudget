@@ -1,5 +1,5 @@
 
-<b>Transaction History For Account: {{ user_account.accountID }} </b>
+<b>Transaction History For Account: {{ user_account.account }} </b>
 <table>
     <th>Date</th>
     <th>User</th>
@@ -13,10 +13,10 @@
         {% for transaction in transactions %}
             <tr>
                 <th>{{ transaction.date }}</th>
-                <th>{{ transaction.userID }}</th>
-                <th>{{ transaction.envelopeID }}</th>
-                <th>{{ transaction.envelopeID.categoryID }}</th>
-                <th>{{ transaction.typeStr }}</th>
+                <th>{{ transaction.user }}</th>
+                <th>{{ transaction.envelope }}</th>
+                <th>{{ transaction.envelope.category }}</th>
+                <th>{{ transaction.type_str }}</th>
                 <th>{{ transaction.description }}</th>
                 <th>{{ transaction.sum }}</th>
                 <th>{{ transaction.comments }}</th>

@@ -1,10 +1,10 @@
 from django import forms
-from .models import Users
+from .models import User
 
 
 class UserForm(forms.ModelForm):
     userPass = forms.CharField(widget=forms.PasswordInput)
 
     class Meta:
-        model = Users
+        model = User
         fields = ('userName', 'userPass', 'firstName', 'lastName')

@@ -1,10 +1,10 @@
 
 <b>Account Information</b>
 {% if user_account %}
-    <p>Name: {{  user_account.accountID }} </p>
-    <p>Budget: {{ user_account.accountID.budget }} </p>
-    <p>Current Balance: {{ user_account.accountID.balance }} </p>
-    <p>Reset Day: {{ user_account.accountID.resetDate }} </p>
+    <p>Name: {{  user_account.account }} </p>
+    <p>Budget: {{ user_account.account.budget }} </p>
+    <p>Current Balance: {{ user_account.account.balance }} </p>
+    <p>Reset Day: {{ user_account.account.resetDate }} </p>
     <hr>
     <b>Envelopes</b>
     <table>
@@ -16,10 +16,10 @@
         </tr>
         {% for envelope in envelopes %}
             <tr>
-                <th>{{ envelope.envelopeName }}</th>
-                <th>{{ envelope.categoryID }}</th>
-                <th>{{ envelope.envelopeBudget }}</th>
-                <th>{{ envelope.currentSum }}</th>
+                <th>{{ envelope.name }}</th>
+                <th>{{ envelope.category }}</th>
+                <th>{{ envelope.budget }}</th>
+                <th>{{ envelope.current_sum }}</th>
                 <th> </th>
             </tr>
     {% endfor %}
@@ -33,20 +33,20 @@
     </table>
     <hr>
     <b>Associated Users</b>
-    {% if user_account.permissionID.id == 1 %}
+    {% if user_account.permission.id == 1 %}
         <table>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Budget</th>
-            <th>Current Balance</th>
+            <th>User Name</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Permission</th>
             <th>Actions</th>
         </tr>
         {% for user in other_users %}
             <tr>
-                <th>{{ user.userID.userName }}</th>
-                <th>{{ user.userID.firstName }}</th>
-                <th>{{ user.userID.lastName }}</th>
-                <th>{{ user.permissionID }}</th>
+                <th>{{ user.user.email }}</th>
+                <th>{{ user.user.first_name }}</th>
+                <th>{{ user.user.last_name }}</th>
+                <th>{{ user.permission }}</th>
                 <th> </th>
             </tr>
         {% endfor %}

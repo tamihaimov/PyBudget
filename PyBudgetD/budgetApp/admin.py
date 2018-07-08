@@ -2,11 +2,12 @@ from django.contrib import admin
 
 from .models import *
 
-admin.site.register(Users)
-admin.site.register(Accounts)
-admin.site.register(Categories)
-admin.site.register(Permissions)
-admin.site.register(UserAccounts)
-admin.site.register(Envelopes)
-admin.site.register(ActivityLogs)
-admin.site.register(ScheduledTransactions)
+admin.site.register(Account)
+admin.site.register(Category)
+admin.site.register(Permission)
+admin.site.register(UserAccount)
+admin.site.register(Envelope)
+admin.site.register(Transaction)
+admin.site.register(ScheduledTransaction)
+
+

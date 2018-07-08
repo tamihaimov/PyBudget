@@ -1,72 +1,63 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
-class Users (models.Model):
-    userName = models.EmailField()
-    userPass = models.CharField(max_length=200)
-    firstName = models.CharField(max_length=200)
-    lastName = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.firstName + " " + self.lastName
-
-
-class Accounts (models.Model):
-    accountName = models.CharField(max_length=400)
+class Account (models.Model):
+    name = models.CharField(max_length=400)
     budget = models.BigIntegerField()
-    resetDate = models.IntegerField()
+    reset_date = models.IntegerField()
 
     def __str__(self):
-        return self.accountName
+        return self.name
     
     def calc_balance (self):
-        envelopes = self.envelopes_set.all()
+        envelopes = self.envelope_set.all()
         balance = 0
         for envelope in envelopes:
-            balance += envelope.currentSum
+            balance += envelope.current_sum
         return balance
     balance = property(calc_balance)
 
 
-class Categories (models.Model):
-    categoryName = models.CharField(max_length=400)
+class Category (models.Model):
+    name = models.CharField(max_length=400)
 
     def __str__(self):
-        return self.categoryName
+        return self.name
 
 
-class Permissions (models.Model):
-    permissionName = models.CharField(max_length=400)
+class Permission (models.Model):
+    name = models.CharField(max_length=400)
 
     def __str__(self):
-        return self.permissionName
+        return self.name
 
 
-class UserAccounts (models.Model):
-    userID = models.ForeignKey(Users, on_delete=models.CASCADE)
-    accountID = models.ForeignKey(Accounts, on_delete=models.CASCADE)
-    permissionID = models.ForeignKey(Permissions, on_delete=models.CASCADE)
-    isDefault = models.BooleanField(default=False)
+class UserAccount (models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    permission = models.ForeignKey(Permission, on_delete=models.CASCADE)
+    is_default = models.BooleanField(default=False)
 
     def __str__(self):
         return "AccountId " + str(self.id)
 
 
-class Envelopes (models.Model):
-    accountID = models.ForeignKey(Accounts, on_delete=models.CASCADE)
-    categoryID = models.ForeignKey(Categories, on_delete=models.CASCADE)
-    envelopeName = models.CharField(max_length=200)
-    envelopeBudget = models.IntegerField()
-    currentSum = models.FloatField()
+class Envelope (models.Model):
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+    budget = models.IntegerField()
+    current_sum = models.FloatField()
 
     def __str__(self):
-        return self.envelopeName
+        return self.name
 
 
-class ActivityLogs (models.Model):
-    accountID = models.ForeignKey(Accounts, on_delete=models.CASCADE)
-    userID = models.ForeignKey(Users, on_delete=models.CASCADE)
-    envelopeID = models.ForeignKey(Envelopes, on_delete=models.CASCADE)
+class Transaction (models.Model):
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
     date = models.DateTimeField()
     type = models.IntegerField()
     description = models.CharField(max_length=200)
@@ -76,18 +67,19 @@ class ActivityLogs (models.Model):
     def __str__(self):
         return self.description + " " + str(self.sum)
 
-    def typeToString (self):
+    def type_to_string (self):
         if self.type == 1:
             return "Expense"
         return "Income"
-    typeStr = property(typeToString)
+    type_str = property(type_to_string)
 
-class ScheduledTransactions (models.Model):
-    userID = models.ForeignKey(Users, on_delete=models.CASCADE)
-    envelopeID = models.ForeignKey(Envelopes, on_delete=models.CASCADE)
-    startDate = models.DateField()
-    endDate = models.DateField()
-    lastUpdate = models.DateField()
+
+class ScheduledTransaction (models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    last_update = models.DateField()
     type = models.IntegerField()
     description = models.CharField(max_length=200)
     sum = models.FloatField()
