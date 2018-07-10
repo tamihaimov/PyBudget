@@ -2,12 +2,12 @@ from django.http import HttpResponse
 from .models import *
 from .forms import *
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserChangeForm
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, login
 from django.conf import settings
+from django.views.generic.edit import UpdateView
 
 
 # Create your views here.
@@ -47,17 +47,29 @@ def user_settings(request):
     return render(request, 'budgetApp/user-settings.html', context)
 
 
-@login_required
-def change_user_info(request):
-    if request.method == 'POST':
-        form = UserChangeForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('budget:user_settings'))
-    else:
-        form = UserChangeForm()
-    return render(request, 'budgetApp/form.html', {'form': form, 'header': 'Change User Info'})
+# @login_required
+# def change_user_info(request):
+#     if request.method == 'POST':
+#         form = ChangeUserInfoForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return HttpResponseRedirect(reverse('budget:user_settings'))
+#     else:
+#         form = ChangeUserInfoForm(instance=request.user)
+#     return render(request, 'budgetApp/form.html', {'form': form, 'header': 'Change User Info'})
 
+
+class ChangeUserInfo(UpdateView):
+    model = User
+    template_name = 'budgetApp/form.html'
+    success_url = reverse_lazy('budget:user_settings')
+    form_class = ChangeUserInfoForm
+
+    def get_object(self, queryset=None):
+        '''This method will load the object
+           that will be used to load the form
+           that will be edited'''
+        return self.request.user
 
 @login_required
 def account_settings(request, user_account_id):
