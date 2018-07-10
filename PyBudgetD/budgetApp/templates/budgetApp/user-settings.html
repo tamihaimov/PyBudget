@@ -4,6 +4,7 @@
     <p>Email: {{  user.email }} </p>
     <p>First Name: {{ user.first_name }} </p>
     <p>Last Name: {{ user.last_name }} </p>
+    <a href="{% url 'budget:change_user_info' %}">Change User Info</a>
      {% if default_account.is_default %}
           <p>Default Account: {{ default_account.account }} </p>
      {% else %}

@@ -6,12 +6,13 @@ app_name = 'budget'
 urlpatterns = [
     # ex: /budget/
     path('', views.welcome, name='welcome'),
-    # ex: /budget/
+    path('welcome/', views.welcome, name='welcome'),
+    # ex: /budget/sign_up/
     path('sign_up/', views.sign_up, name='sign_up'),
-    # # ex: /budget/555
-    # path('<int:user_id>/', views.welcome, name='welcome'),
-    # ex: /budget/555/settings/
-    path('<int:user_id>/settings/', views.user_settings, name='user_settings'),
+    # ex: /budget/settings/
+    path('settings/', views.user_settings, name='user_settings'),
+    # ex: /budget/change-user-info/
+    path('change-user-info/', views.change_user_info, name='change_user_info'),
     # ex: /budget/account/1515/
     path('account/<int:user_account_id>/', views.account_settings, name='account_settings'),
     # ex: /budget/transaction/1515/

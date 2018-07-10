@@ -1,13 +1,13 @@
 from django.http import HttpResponse
 from .models import *
+from .forms import *
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import authenticate
 from django.conf import settings
-from django.views import generic
 
 
 # Create your views here.
@@ -23,35 +23,47 @@ def welcome(request):
 
 def sign_up(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            user_name = form.cleaned_data.get('user_name')
+            user_name = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user_name, password=raw_password)
             login(request, user)
-            return redirect('budget')
+            return HttpResponseRedirect(reverse('budget:welcome'))
     else:
-        form = UserCreationForm()
-    return render(request, 'registration/sign-up.html', {'form': form})
+        form = SignUpForm()
+    return render(request, 'budgetApp/form.html', {'form': form, 'header': 'Sign Up'})
 
 
 @login_required
-def user_settings(request, user_id):
+def user_settings(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     user = request.user
-    accounts = user.useraccount_set.order_by('-isDefault')
+    accounts = user.useraccount_set.order_by('-is_default')
     default_account = accounts.first()
     context = {'user': user, 'default_account': default_account, 'accounts': accounts}
     return render(request, 'budgetApp/user-settings.html', context)
 
 
 @login_required
+def change_user_info(request):
+    if request.method == 'POST':
+        form = UserChangeForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('budget:user_settings'))
+    else:
+        form = UserChangeForm()
+    return render(request, 'budgetApp/form.html', {'form': form, 'header': 'Change User Info'})
+
+
+@login_required
 def account_settings(request, user_account_id):
     user_account = get_object_or_404(UserAccount, pk=user_account_id)
     envelopes = user_account.account.envelope_set.all()
-    other_users = UserAccount.objects.filter(accountID=user_account.account).exclude(id=user_account_id)
+    other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)
     context = {'user_account': user_account, 'envelopes': envelopes, 'other_users': other_users}
     return render(request, 'budgetApp/account-settings.html', context)
 
@@ -60,7 +72,7 @@ def account_settings(request, user_account_id):
 def transaction(request, user_account_id):
     user_account = get_object_or_404(UserAccount, pk=user_account_id)
     envelopes = user_account.account.envelope_set.all()
-    other_users = UserAccount.objects.filter(accountID=user_account.account).exclude(id=user_account_id)
+    other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)
     context = {'user_account': user_account, 'envelopes': envelopes, 'other_users': other_users}
     return render(request, 'budgetApp/transaction.html', context)
 
@@ -76,8 +88,8 @@ def add_transaction(request, user_account_id):
             'error_message': "Invalid envelope"
         })
     else:
-        transaction = Transaction.objects.create(accountID=user_account.account, userID=user_account.user_id,
-                                                 envelopeID=envelope, date=request.POST['date'],
+        transaction = Transaction.objects.create(account=user_account.account, user=user_account.user_id,
+                                                 envelope=envelope, date=request.POST['date'],
                                                  type=int(request.POST['type']), description=request.POST['description'],
                                                  sum=float(request.POST['sum']), comments=request.POST['comment'])
         if transaction:
@@ -86,7 +98,7 @@ def add_transaction(request, user_account_id):
             else:
                 envelope.currentSum += transaction.sum
             envelope.save()
-    return HttpResponseRedirect(reverse('budgetApp:welcome', args=(user_account.user_id,)))
+    return HttpResponseRedirect(reverse('budget:welcome', args=(user_account.user_id,)))
 
 
 @login_required
@@ -101,9 +113,6 @@ def history(request, user_account_id):
 def statistics(request, user_account_id):
     return HttpResponse("Got to statistics page. hurray!")
 
-
-def login(request):
-    return HttpResponse("Got to login page. hurray!")
 
 
 def scheduled_transactions(request, user_account_id):
