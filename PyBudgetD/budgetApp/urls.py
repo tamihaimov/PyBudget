@@ -14,7 +14,9 @@ urlpatterns = [
     # ex: /budget/change-user-info/
     path('change-user-info/', views.ChangeUserInfo.as_view(), name='change_user_info'),
     # ex: /budget/account/1515/
-    path('account/<int:user_account_id>/', views.account_settings, name='account_settings'),
+    path('account/<int:user_account_id>/', views.account_view, name='account_view'),
+    # ex: /budget/account/1515/settings
+    path('account/<int:user_account_id>/settings/', views.account_settings, name='account_settings'),
     # ex: /budget/transaction/1515/
     path('transaction/<int:user_account_id>/', views.transaction, name='transaction'),
     # ex: /budget/transaction/1515/

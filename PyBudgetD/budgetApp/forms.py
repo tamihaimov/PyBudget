@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django import forms
 from django.forms import modelform_factory
-from .models import User
+from .models import User, Account
 
 
 class SignUpForm(UserCreationForm):
@@ -40,4 +40,4 @@ class ChangeUserInfoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
 
-ChangeForm = modelform_factory(User, fields=('first_name', 'last_name', 'email'))
+AddAccountForm = modelform_factory(Account, fields=('name', 'budget', 'reset_date'))

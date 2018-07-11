@@ -28,19 +28,24 @@
                     {% if account.permission.id == 1 %}
                         <a href="{% url 'budget:account_settings' account.id %}">Edit</a>
                     {% endif %}
-                    <a href="{% url 'budget:history' account.id %}">View</a>
+                    <a href="{% url 'budget:account_view' account.id %}">View</a>
                 </th>
 
             </tr>
     {% endfor %}
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Add</th>
-            </tr>
-
     </table>
+    <hr>
+    <b>Create New Account</b>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="name" id="name"/>
+        <label>Name:</label><br/>
+        <input type="number" name="budget" id="budget"/>
+        <label>Budget:</label><br/>
+        <input type="number" name="reset_date" id="reset_date"/>
+        <label>Reset Date:</label><br/>
+        <input type="submit" value="Save" />
+    </form>
 {% else %}
     <p>No user found</p>
 {% endif %}

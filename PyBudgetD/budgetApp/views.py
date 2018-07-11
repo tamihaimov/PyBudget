@@ -40,23 +40,21 @@ def sign_up(request):
 def user_settings(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    if request.method == 'POST':
+        form = AddAccountForm(request.POST)
+        if form.is_valid():
+            new_account = form.save()
+            user_account = UserAccount()
+            user_account.user = request.user
+            user_account.account = new_account
+            user_account.permission = Permission.objects.filter(name = 'owner').first()
+            user_account.save()
+        return HttpResponseRedirect(reverse('budget:user_settings'))
     user = request.user
     accounts = user.useraccount_set.order_by('-is_default')
     default_account = accounts.first()
     context = {'user': user, 'default_account': default_account, 'accounts': accounts}
     return render(request, 'budgetApp/user-settings.html', context)
-
-
-# @login_required
-# def change_user_info(request):
-#     if request.method == 'POST':
-#         form = ChangeUserInfoForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return HttpResponseRedirect(reverse('budget:user_settings'))
-#     else:
-#         form = ChangeUserInfoForm(instance=request.user)
-#     return render(request, 'budgetApp/form.html', {'form': form, 'header': 'Change User Info'})
 
 
 class ChangeUserInfo(UpdateView):
@@ -70,6 +68,16 @@ class ChangeUserInfo(UpdateView):
            that will be used to load the form
            that will be edited'''
         return self.request.user
+
+
+@login_required
+def account_view(request, user_account_id):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
+    user_account = get_object_or_404(UserAccount, pk=user_account_id)
+    context = {'user_account': user_account}
+    return render(request, 'budgetApp/account-view.html', context)
+
 
 @login_required
 def account_settings(request, user_account_id):
