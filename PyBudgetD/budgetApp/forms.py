@@ -1,8 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django import forms
 from django.forms import modelform_factory
-from .models import User, Account
+from .models import *
 
+
+# Creation Forms
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30)
@@ -24,6 +26,19 @@ class SignUpForm(UserCreationForm):
         return user
 
 
+class AddEnvelopeForm(forms.ModelForm):
+
+    class Meta:
+        model = Envelope
+        fields = ('account', 'category', 'name', 'budget', 'current_sum')
+
+    def __init__(self, *args, **kwargs):
+        super(AddEnvelopeForm, self).__init__(*args, **kwargs)
+        self.fields['account'].queryset = Account.objects.filter(pk= kwargs['initial']['id_account'])
+
+# Change Forms
+
+
 class ChangeUserInfoForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=150)
@@ -40,4 +55,37 @@ class ChangeUserInfoForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
 
-AddAccountForm = modelform_factory(Account, fields=('name', 'budget', 'reset_date'))
+class ChangeAccountForm(forms.ModelForm):
+    name = forms.CharField(max_length=400)
+    budget = forms.IntegerField()
+    reset_date = forms.IntegerField()
+
+    class Meta:
+        model = Account
+        fields = ('name', 'budget', 'reset_date')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+class ChangeEnvelopeForm(forms.ModelForm):
+    name = forms.CharField(max_length=200)
+    budget = forms.IntegerField()
+
+    class Meta:
+        model = Account
+        fields = ('name', 'budget')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+# General Forms
+
+AccountForm = modelform_factory(Account, fields=('name', 'budget', 'reset_date'))
+
+
+EnvelopeForm = modelform_factory(Envelope, fields=('account', 'category', 'name', 'budget', 'current_sum'))
+
+
+UserAccountForm = modelform_factory(UserAccount, fields=('user', 'account', 'permission', 'is_default'))

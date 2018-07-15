@@ -7,10 +7,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.conf import settings
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, CreateView, DeleteView
 
 
-# Create your views here.
+# Landing page
 @login_required
 def welcome(request):
     if not request.user.is_authenticated:
@@ -21,6 +21,7 @@ def welcome(request):
     return render(request, 'budgetApp/welcome.html', context)
 
 
+# Authentication views
 def sign_up(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -36,12 +37,13 @@ def sign_up(request):
     return render(request, 'budgetApp/form.html', {'form': form, 'header': 'Sign Up'})
 
 
+# User settings main view and actions
 @login_required
 def user_settings(request):
     if not request.user.is_authenticated:
         return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     if request.method == 'POST':
-        form = AddAccountForm(request.POST)
+        form = AccountForm(request.POST)
         if form.is_valid():
             new_account = form.save()
             user_account = UserAccount()
@@ -70,6 +72,67 @@ class ChangeUserInfo(UpdateView):
         return self.request.user
 
 
+class ChangeAccountInfo (UpdateView):
+    model = Account
+    template_name = 'budgetApp/form.html'
+    form_class = AccountForm
+
+    def get_success_url(self):
+        user_account = UserAccount.objects.filter(user=self.request.user, account_id=self.kwargs['pk']).first()
+        return reverse('budget:account_settings', kwargs={'user_account_id': user_account.id})
+
+
+class ChangeEnvelopeInfo (UpdateView):
+    model = Envelope
+    template_name = 'budgetApp/form.html'
+    form_class = EnvelopeForm
+
+    def get_success_url(self):
+        user_account = UserAccount.objects.filter(user=self.request.user, account_id=self.object.account_id).first()
+        return reverse('budget:account_settings', kwargs={'user_account_id': user_account.id})
+
+
+class ChangeUserAccountInfo (UpdateView):
+    model = UserAccount
+    template_name = 'budgetApp/form.html'
+    form_class = UserAccountForm
+
+    def get_success_url(self):
+        user_account = UserAccount.objects.filter(user=self.request.user, account_id=self.object.account_id).first()
+        return reverse('budget:account_settings', kwargs={'user_account_id': user_account.id})
+
+
+class AddEnvelope (CreateView):
+    form_class = AddEnvelopeForm
+    template_name = 'budgetApp/form.html'
+
+    def get_success_url(self):
+        user_account = UserAccount.objects.filter(user=self.request.user, account_id=self.object.account_id).first()
+        return reverse('budget:account_settings', kwargs={'user_account_id': user_account.id})
+
+    def get_initial(self):
+        account = get_object_or_404(Account, pk=self.kwargs.pop('account_id'))
+        return {
+            'account': account,
+            'id_account': account.id,
+            'current_sum': 0
+        }
+
+
+class DeleteEnvelope (DeleteView):
+    model = Envelope
+    template_name = 'budgetApp/delete-form.html'
+
+    def get_success_url(self):
+        user_account = UserAccount.objects.filter(user=self.request.user, account_id=self.object.account_id).first()
+        return reverse('budget:account_settings', kwargs={'user_account_id': user_account.id})
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteEnvelope, self).get_context_data()
+        context['object_type'] = 'Envelope'
+        return context
+
+
 @login_required
 def account_view(request, user_account_id):
     if not request.user.is_authenticated:
@@ -81,6 +144,8 @@ def account_view(request, user_account_id):
 
 @login_required
 def account_settings(request, user_account_id):
+    if not request.user.is_authenticated:
+        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     user_account = get_object_or_404(UserAccount, pk=user_account_id)
     envelopes = user_account.account.envelope_set.all()
     other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)

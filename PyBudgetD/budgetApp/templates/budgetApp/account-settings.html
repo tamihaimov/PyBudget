@@ -1,12 +1,13 @@
 
-<b>Account Information</b>
+<h1>Account Information</h1>
 {% if user_account %}
     <p>Name: {{  user_account.account }} </p>
     <p>Budget: {{ user_account.account.budget }} </p>
     <p>Current Balance: {{ user_account.account.balance }} </p>
     <p>Reset Day: {{ user_account.account.reset_date }} </p>
+    <a href="{% url 'budget:change_account_info' user_account.account.id %}">Edit Account</a>
     <hr>
-    <b>Envelopes</b>
+    <h2>Envelopes</h2>
     <table>
             <th>Name</th>
             <th>Category</th>
@@ -20,19 +21,22 @@
                 <th>{{ envelope.category }}</th>
                 <th>{{ envelope.budget }}</th>
                 <th>{{ envelope.current_sum }}</th>
-                <th> </th>
+                {% if user_account.permission.id == 1 %}
+                    <th>
+                        <a href="{% url 'budget:change_envelope_info' envelope.id %}">Edit</a>
+                        <a href="{% url 'budget:delete-envelope' envelope.id %}">Delete</a>
+                    </th>
+                {% else %}
+                    <th></th>
+                {% endif %}
             </tr>
     {% endfor %}
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Add</th>
-            </tr>
     </table>
+    {% if user_account.permission.id == 1 %}
+        <a href="{% url 'budget:add-envelope' user_account.account.id %}">Add Envelope</a>
+    {% endif %}
     <hr>
-    <b>Associated Users</b>
+    <h2>Associated Users</h2>
     {% if user_account.permission.id == 1 %}
         <table>
             <th>User Name</th>
@@ -50,14 +54,8 @@
                 <th> </th>
             </tr>
         {% endfor %}
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th>Add</th>
-            </tr>
         </table>
+
     {% else %}
         <p>No permission to see other users</p>
     {% endif %}
