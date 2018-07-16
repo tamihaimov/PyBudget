@@ -46,6 +46,9 @@ urlpatterns += [
 
 # Add Django site authentication urls (for login, logout, password management)
 urlpatterns += [
+    # ex: /budgetApp/logout
+    path('logout/', views.logout_view, name='log-out'),
     # ex: /budgetApp/auth
     path('auth/', include('django.contrib.auth.urls')),
+
 ]

@@ -1,65 +1,80 @@
 
-<h1>Account Information</h1>
-{% if user_account %}
-    <p>Name: {{  user_account.account }} </p>
-    <p>Budget: {{ user_account.account.budget }} </p>
-    <p>Current Balance: {{ user_account.account.balance }} </p>
-    <p>Reset Day: {{ user_account.account.reset_date }} </p>
-    <a href="{% url 'budget:change_account_info' user_account.account.id %}">Edit Account</a>
-    <hr>
-    <h2>Envelopes</h2>
-    <table>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Budget</th>
-            <th>Current Balance</th>
-            <th>Actions</th>
-        </tr>
-        {% for envelope in envelopes %}
-            <tr>
-                <th>{{ envelope.name }}</th>
-                <th>{{ envelope.category }}</th>
-                <th>{{ envelope.budget }}</th>
-                <th>{{ envelope.current_sum }}</th>
-                {% if user_account.permission.id == 1 %}
-                    <th>
-                        <a href="{% url 'budget:change_envelope_info' envelope.id %}">Edit</a>
-                        <a href="{% url 'budget:delete-envelope' envelope.id %}">Delete</a>
-                    </th>
-                {% else %}
-                    <th></th>
-                {% endif %}
-            </tr>
-    {% endfor %}
-    </table>
-    {% if user_account.permission.id == 1 %}
-        <a href="{% url 'budget:add-envelope' user_account.account.id %}">Add Envelope</a>
-    {% endif %}
-    <hr>
-    <h2>Associated Users</h2>
-    {% if user_account.permission.id == 1 %}
+<head>
+<style>
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+
+<body>
+    <h1>Account Settings</h1>
+    <h2>Account Information</h2>
+    {% if user_account %}
+        <p>Name: {{  user_account.account }} </p>
+        <p>Budget: {{ user_account.account.budget }} </p>
+        <p>Current Balance: {{ user_account.account.balance }} </p>
+        <p>Reset Day: {{ user_account.account.reset_date }} </p>
+        <a href="{% url 'budget:change_account_info' user_account.account.id %}">Edit Account</a>
+        <hr>
+        <h2>Envelopes</h2>
         <table>
-            <th>User Name</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Permission</th>
-            <th>Actions</th>
-        </tr>
-        {% for user in other_users %}
-            <tr>
-                <th>{{ user.user.email }}</th>
-                <th>{{ user.user.first_name }}</th>
-                <th>{{ user.user.last_name }}</th>
-                <th>{{ user.permission }}</th>
-                <th> </th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Budget</th>
+                <th>Current Balance</th>
+                <th>Actions</th>
             </tr>
+            {% for envelope in envelopes %}
+                <tr>
+                    <td>{{ envelope.name }}</td>
+                    <td>{{ envelope.category }}</td>
+                    <td>{{ envelope.budget }}</td>
+                    <td>{{ envelope.current_sum }}</td>
+                    {% if user_account.permission.id == 1 %}
+                        <td>
+                            <a href="{% url 'budget:change_envelope_info' envelope.id %}">Edit</a>
+                            <a href="{% url 'budget:delete-envelope' envelope.id %}">Delete</a>
+                        </td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                </tr>
         {% endfor %}
         </table>
+        {% if user_account.permission.id == 1 %}
+            <a href="{% url 'budget:add-envelope' user_account.account.id %}">Add Envelope</a>
+        {% endif %}
+        <hr>
+        <h2>Associated Users</h2>
+        {% if user_account.permission.id == 1 %}
+            <table>
+                <th>User Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Permission</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in other_users %}
+                <tr>
+                    <td>{{ user.user.email }}</td>
+                    <td>{{ user.user.first_name }}</td>
+                    <td>{{ user.user.last_name }}</td>
+                    <td>{{ user.permission }}</td>
+                    <td> </td>
+                </tr>
+            {% endfor %}
+            </table>
+
+        {% else %}
+            <p>No permission to see other users</p>
+        {% endif %}
 
     {% else %}
-        <p>No permission to see other users</p>
+        <p>No account found</p>
     {% endif %}
-
-{% else %}
-    <p>No account found</p>
-{% endif %}
+    <p><a href="{% url 'budget:log-out' %}">Logout</a></p>
+</body>

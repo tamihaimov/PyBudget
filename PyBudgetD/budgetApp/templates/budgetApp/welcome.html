@@ -10,11 +10,13 @@
       <hr>
       <ul>
           <li><a href="{% url 'budget:transaction' account.id %}">Add Transaction</a></li>
-          <li><a href="{% url 'budget:history' account.id %}">View Account History</a></li>
+          <li><a href="{% url 'budget:history' account.id %}">View Transaction History</a></li>
           <li><a href="{% url 'budget:statistics' account.id %}">View Account Statistics</a></li>
       </ul>
    {% endfor %}
 {% else %}
     <p>No default account</p>
- <li><a href="{% url 'budget:user_settings' %}">Settings</a></li>
 {% endif %}
+<p><a href="{% url 'budget:user_settings' %}">Settings</a><br/>
+<a href="{% url 'budget:log-out' %}">Logout</a></p>
+

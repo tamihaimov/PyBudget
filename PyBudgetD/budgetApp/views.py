@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.conf import settings
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 
@@ -37,6 +37,11 @@ def sign_up(request):
     return render(request, 'budgetApp/form.html', {'form': form, 'header': 'Sign Up'})
 
 
+def logout_view(request):
+    logout(request)
+    return  HttpResponseRedirect(reverse('budget:welcome'))
+
+
 # User settings main view and actions
 @login_required
 def user_settings(request):
@@ -49,7 +54,10 @@ def user_settings(request):
             user_account = UserAccount()
             user_account.user = request.user
             user_account.account = new_account
-            user_account.permission = Permission.objects.filter(name = 'owner').first()
+            user_account.permission = Permission.objects.filter(name='owner').first()
+            default_account = UserAccount.objects.filter(user=request.user, is_default=1).first()
+            if default_account is None:
+                user_account.is_default = 1
             user_account.save()
         return HttpResponseRedirect(reverse('budget:user_settings'))
     user = request.user
@@ -72,6 +80,7 @@ class ChangeUserInfo(UpdateView):
         return self.request.user
 
 
+# Account settings and actions view
 class ChangeAccountInfo (UpdateView):
     model = Account
     template_name = 'budgetApp/form.html'
@@ -173,17 +182,17 @@ def add_transaction(request, user_account_id):
             'error_message': "Invalid envelope"
         })
     else:
-        transaction = Transaction.objects.create(account=user_account.account, user=user_account.user_id,
+        transaction = Transaction.objects.create(account=user_account.account, user=user_account.user,
                                                  envelope=envelope, date=request.POST['date'],
                                                  type=int(request.POST['type']), description=request.POST['description'],
                                                  sum=float(request.POST['sum']), comments=request.POST['comment'])
         if transaction:
             if transaction.type == 1:
-                envelope.currentSum -= transaction.sum
+                envelope.current_sum -= transaction.sum
             else:
-                envelope.currentSum += transaction.sum
+                envelope.current_sum += transaction.sum
             envelope.save()
-    return HttpResponseRedirect(reverse('budget:welcome', args=(user_account.user_id,)))
+    return HttpResponseRedirect(reverse('budget:welcome'))
 
 
 @login_required
@@ -197,7 +206,6 @@ def history(request, user_account_id):
 @login_required
 def statistics(request, user_account_id):
     return HttpResponse("Got to statistics page. hurray!")
-
 
 
 def scheduled_transactions(request, user_account_id):

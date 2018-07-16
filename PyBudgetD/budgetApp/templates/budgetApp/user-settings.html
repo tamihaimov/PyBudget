@@ -1,4 +1,16 @@
+<head>
+<style>
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
 
+<body>
+<h1>User Settings</h1>
 <b>User Information</b>
 {% if user %}
     <p>Email: {{  user.email }} </p>
@@ -21,15 +33,15 @@
         </tr>
         {% for account in accounts %}
             <tr>
-                <th>{{ account.account }}</th>
-                <th>{{ account.permission}}</th>
-                <th>{{ account.account.balance}}</th>
-                <th>
+                <td>{{ account.account }}</td>
+                <td>{{ account.permission}}</td>
+                <td>{{ account.account.balance}}</td>
+                <td>
                     {% if account.permission.id == 1 %}
                         <a href="{% url 'budget:account_settings' account.id %}">Edit</a>
                     {% endif %}
                     <a href="{% url 'budget:account_view' account.id %}">View</a>
-                </th>
+                </td>
 
             </tr>
     {% endfor %}
@@ -38,14 +50,16 @@
     <b>Create New Account</b>
     <form method="post">
         {% csrf_token %}
-        <input type="text" name="name" id="name"/>
-        <label>Name:</label><br/>
-        <input type="number" name="budget" id="budget"/>
-        <label>Budget:</label><br/>
-        <input type="number" name="reset_date" id="reset_date"/>
-        <label>Reset Date:</label><br/>
+        <p><label>Name:</label>
+        <input type="text" name="name" id="name"/></p>
+         <p><label>Budget:</label>
+        <input type="number" name="budget" id="budget"/></p>
+         <p><label>Reset Date:</label>
+        <input type="number" name="reset_date" id="reset_date"/></p>
         <input type="submit" value="Save" />
     </form>
 {% else %}
     <p>No user found</p>
 {% endif %}
+<p><a href="{% url 'budget:log-out' %}">Logout</a></p>
+</body>

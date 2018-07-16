@@ -1,6 +1,17 @@
+<head>
+<style>
+th, td {
+    padding: 5px;
+}
+th {
+    text-align: left;
+}
+</style>
+</head>
+<body>
+<h2>Transaction History For Account: {{ user_account.account }} </h2>
 
-<b>Transaction History For Account: {{ user_account.account }} </b>
-<table>
+<table style="width:100%">
     <th>Date</th>
     <th>User</th>
     <th>Envelope</th>
@@ -12,15 +23,16 @@
         </tr>
         {% for transaction in transactions %}
             <tr>
-                <th>{{ transaction.date }}</th>
-                <th>{{ transaction.user }}</th>
-                <th>{{ transaction.envelope }}</th>
-                <th>{{ transaction.envelope.category }}</th>
-                <th>{{ transaction.type_str }}</th>
-                <th>{{ transaction.description }}</th>
-                <th>{{ transaction.sum }}</th>
-                <th>{{ transaction.comments }}</th>
+                <td>{{ transaction.date.date }}</td>
+                <td>{{ transaction.user.first_name}} {{ transaction.user.last_name }}</td>
+                <td>{{ transaction.envelope }}</td>
+                <td>{{ transaction.envelope.category }}</td>
+                <td>{{ transaction.type_str }}</td>
+                <td>{{ transaction.description }}</td>
+                <td>{{ transaction.sum }}</td>
+                <td>{{ transaction.comments }}</td>
             </tr>
     {% endfor %}
 </table>
+</body>
 
