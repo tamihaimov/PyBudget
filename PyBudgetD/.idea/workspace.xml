@@ -10,7 +10,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/PyBudgetD$Test__budgetApp_tests_TestLogin.coverage" NAME="Test: budgetApp.tests.TestLogin Coverage Results" MODIFIED="1532032095788" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PyBudgetD$Test__budgetApp_tests_TestLogin_tearDownClass.coverage" NAME="Test: budgetApp.tests.TestLogin.tearDownClass Coverage Results" MODIFIED="1532028965653" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PyBudgetD$Test__budgetApp_tests_TestLogin_test_login_with_user.coverage" NAME="Test: budgetApp.tests.TestLogin.test_login_with_user Coverage Results" MODIFIED="1532027548986" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PyBudgetD$Test__budgetApp_tests_TestLogin_setUp.coverage" NAME="Test: budgetApp.tests.TestLogin.setUp Coverage Results" MODIFIED="1532028716057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PyBudgetD$Test__budgetApp_tests.coverage" NAME="Test: budgetApp.tests Coverage Results" MODIFIED="1532029465893" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/PyBudgetD$Test__budgetApp_tests_TestLogin_test_login_bad_user.coverage" NAME="Test: budgetApp.tests.TestLogin.test_login_bad_user Coverage Results" MODIFIED="1532028927784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/PyBudgetD$models.coverage" NAME="models Coverage Results" MODIFIED="1530467700560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/budgetApp" />
+    <SUITE FILE_PATH="coverage/PyBudgetD$Test__budgetApp_tests_TestLogin_tearDown.coverage" NAME="Test: budgetApp.tests.TestLogin.tearDown Coverage Results" MODIFIED="1532029493458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -40,25 +47,46 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/budgetApp/views.py">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/budgetApp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="60" column="31" lean-forward="true" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+            <state relative-caret-position="588">
+              <caret line="86" column="60" selection-start-line="86" selection-start-column="60" selection-end-line="86" selection-end-column="60" />
               <folding>
-                <element signature="e#0#36#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/budgetApp/forms.py">
+      <file leaf-file-name="tests.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/budgetApp/tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-408">
-              <caret line="18" column="32" lean-forward="true" selection-start-line="18" selection-start-column="32" selection-end-line="18" selection-end-column="32" />
+            <state relative-caret-position="318">
+              <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
               <folding>
-                <element signature="e#0#69#0" expanded="true" />
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="client.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/test/client.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="630" column="8" selection-start-line="630" selection-start-column="8" selection-end-line="630" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/budgetApp/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-124">
+              <caret line="147" column="47" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#36#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,20 +95,11 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/budgetApp/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
+            <state relative-caret-position="102">
+              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="user-settings.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/budgetApp/templates/budgetApp/user-settings.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1071">
-              <caret line="63" column="31" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -90,45 +109,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="history.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/budgetApp/templates/budgetApp/history.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-142">
-              <caret line="9" column="7" lean-forward="true" selection-end-line="9" selection-end-column="7" />
-              <folding>
-                <element signature="n#style#0;n#table#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="account-settings.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/budgetApp/templates/budgetApp/account-settings.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="transaction.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/budgetApp/templates/budgetApp/transaction.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="30" lean-forward="true" selection-start-line="17" selection-start-column="30" selection-end-line="17" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="welcome.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/budgetApp/templates/budgetApp/welcome.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -151,6 +131,8 @@
       <find>reverse_lazy</find>
       <find>get_object_or_404</find>
       <find>login</find>
+      <find>test_login_with_user</find>
+      <find>super</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -168,7 +150,6 @@
         <option value="$PROJECT_DIR$/budgetApp/admin.py" />
         <option value="$PROJECT_DIR$/PyBudgetD/settings.py" />
         <option value="$PROJECT_DIR$/PyBudgetD/urls.py" />
-        <option value="$PROJECT_DIR$/budgetApp/models.py" />
         <option value="$PROJECT_DIR$/budgetApp/templates/registration/login.html" />
         <option value="$PROJECT_DIR$/budgetApp/templates/registration/sign-up.html" />
         <option value="$PROJECT_DIR$/budgetApp/templates/budgetApp/form.html" />
@@ -181,7 +162,9 @@
         <option value="$PROJECT_DIR$/budgetApp/templates/budgetApp/welcome.html" />
         <option value="$PROJECT_DIR$/budgetApp/templates/budgetApp/account-settings.html" />
         <option value="$PROJECT_DIR$/budgetApp/templates/budgetApp/account-view.html" />
+        <option value="$PROJECT_DIR$/budgetApp/models.py" />
         <option value="$PROJECT_DIR$/budgetApp/views.py" />
+        <option value="$PROJECT_DIR$/budgetApp/tests.py" />
       </list>
     </option>
   </component>
@@ -235,7 +218,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="user_settings&#9;null&#9;null&#10;get_user_model&#9;null&#9;null&#10;apps_ready&#9;null&#9;null" />
+    <property name="SearchEverywhereHistoryKey" value="test_login_with_user&#9;RUN_CONFIGURATION&#9;Test: budgetApp.tests.TestLogin.test_login_with_user&#10;user_settings&#9;null&#9;null&#10;get_user_model&#9;null&#9;null&#10;apps_ready&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="Sqlite (Xerial)" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -262,8 +245,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Django server.PyBudgetD">
-    <configuration name="models" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Django tests.Test: budgetApp.tests.TestLogin">
+    <configuration name="Test: budgetApp.tests" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
       <module name="PyBudgetD" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -271,16 +254,92 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/budgetApp" />
+      <option name="WORKING_DIRECTORY" value="" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/budgetApp/models.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
+      <option name="TARGET" value="budgetApp.tests" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+    </configuration>
+    <configuration name="Test: budgetApp.tests.TestLogin" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <module name="PyBudgetD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="budgetApp.tests.TestLogin" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+    </configuration>
+    <configuration name="Test: budgetApp.tests.TestLogin.tearDown" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <module name="PyBudgetD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="budgetApp.tests.TestLogin.tearDown" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+    </configuration>
+    <configuration name="Test: budgetApp.tests.TestLogin.tearDownClass" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <module name="PyBudgetD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="budgetApp.tests.TestLogin.tearDownClass" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+    </configuration>
+    <configuration name="Test: budgetApp.tests.TestLogin.test_login_bad_user" type="DjangoTestsConfigurationType" factoryName="Django tests" temporary="true">
+      <module name="PyBudgetD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="budgetApp.tests.TestLogin.test_login_bad_user" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
     </configuration>
     <configuration name="PyBudgetD" type="Python.DjangoServer" factoryName="Django server">
       <module name="PyBudgetD" />
@@ -307,11 +366,19 @@
     </configuration>
     <list>
       <item itemvalue="Django server.PyBudgetD" />
-      <item itemvalue="Python.models" />
+      <item itemvalue="Django tests.Test: budgetApp.tests" />
+      <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin.test_login_bad_user" />
+      <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin.tearDownClass" />
+      <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin" />
+      <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin.tearDown" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.models" />
+        <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin" />
+        <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin.tearDown" />
+        <item itemvalue="Django tests.Test: budgetApp.tests" />
+        <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin.tearDownClass" />
+        <item itemvalue="Django tests.Test: budgetApp.tests.TestLogin.test_login_bad_user" />
       </list>
     </recent_temporary>
   </component>
@@ -328,6 +395,38 @@
     </task>
     <servers />
   </component>
+  <component name="TestHistory">
+    <history-entry file="Test__budgetApp_tests - 2018.07.19 at 22h 44m 28s.xml">
+      <configuration name="Test: budgetApp.tests" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin_tearDown - 2018.07.19 at 22h 45m 06s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin.tearDown" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 22h 47m 06s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 23h 11m 07s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 23h 13m 22s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 23h 14m 03s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 23h 21m 55s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 23h 22m 17s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 23h 27m 09s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+    <history-entry file="Test__budgetApp_tests_TestLogin - 2018.07.19 at 23h 28m 17s.xml">
+      <configuration name="Test: budgetApp.tests.TestLogin" configurationId="DjangoTestsConfigurationType" />
+    </history-entry>
+  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />
@@ -342,19 +441,20 @@
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5012854" side_tool="true" visible="true" weight="0.3211382" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5012854" side_tool="true" weight="0.398374" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3298292" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3292683" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.3292683" />
+      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.155527" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4993573" weight="0.3292683" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0996144" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.49871466" visible="true" weight="0.3211382" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49871466" weight="0.3211382" />
       <window_info anchor="right" id="SciView" order="5" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.499375" weight="0.39947438" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49871466" weight="0.398374" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -366,6 +466,32 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0996144" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="right" id="R Graphics" order="3" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3298292" />
+      <window_info anchor="bottom" id="Inspection Results" order="12" weight="0.3298292" />
+      <window_info anchor="right" id="R Packages" order="6" />
+      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.49871466" visible="true" weight="0.3211382" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4993573" weight="0.3292683" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5012854" side_tool="true" visible="true" weight="0.3211382" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="SciView" order="5" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.499375" weight="0.39947438" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.3292683" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -377,9 +503,14 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/__init__.py</url>
-          <line>192</line>
-          <option name="timeStamp" value="4" />
+          <url>file://$PROJECT_DIR$/budgetApp/tests.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/budgetApp/tests.py</url>
+          <line>17</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -389,31 +520,10 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="9" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../../untitled/mysite/polls/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/admin/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="56" column="31" selection-start-line="56" selection-start-column="31" selection-end-line="56" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/shortcuts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="88" column="27" selection-start-line="88" selection-start-column="22" selection-end-line="88" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/PyBudget/PyBudgetD/budgetApp/templates/budgetApp/account-settings.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -441,9 +551,6 @@
           <caret line="55" column="63" lean-forward="true" selection-start-line="55" selection-start-column="63" selection-end-line="55" selection-end-column="63" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budgetApp/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -561,13 +668,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="63" column="4" selection-start-line="63" selection-start-column="4" selection-end-line="63" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/budgetApp/templates/registration/change-user-info.html" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/forms.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -611,13 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/urls/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="92" column="17" lean-forward="true" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/views/generic/edit.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-206">
@@ -629,16 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
           <caret line="94" column="13" selection-start-line="94" selection-start-column="13" selection-end-line="94" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budgetApp/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,16 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/budgetApp/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="49" column="52" selection-start-line="49" selection-start-column="52" selection-end-line="49" selection-end-column="52" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -717,6 +790,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/budgetApp/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/contrib/auth/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pycharm/django_test_manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="167" selection-start-line="167" selection-end-line="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/test/testcases.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="986" column="16" lean-forward="true" selection-start-line="986" selection-start-column="16" selection-end-line="986" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/urls/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="89" selection-start-line="89" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/budgetApp/templates/budgetApp/account-view.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -724,12 +835,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/budgetApp/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="588">
+          <caret line="86" column="60" selection-start-line="86" selection-start-column="60" selection-end-line="86" selection-end-column="60" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/test/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="630" column="8" selection-start-line="630" selection-start-column="8" selection-end-line="630" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/budgetApp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="60" column="31" lean-forward="true" selection-start-line="60" selection-start-column="31" selection-end-line="60" selection-end-column="31" />
+        <state relative-caret-position="-124">
+          <caret line="147" column="47" selection-start-line="147" selection-start-column="47" selection-end-line="147" selection-end-column="47" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/budgetApp/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

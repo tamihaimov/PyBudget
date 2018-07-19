@@ -6,15 +6,12 @@ from django.urls import reverse, reverse_lazy
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
-from django.conf import settings
 from django.views.generic.edit import UpdateView, CreateView, DeleteView
 
 
 # Landing page
 @login_required
 def welcome(request):
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     user = request.user
     default_account = UserAccount.objects.filter(user_id=user.id, is_default=True)
     context = {'user': user, 'default_account': default_account}
@@ -39,14 +36,12 @@ def sign_up(request):
 
 def logout_view(request):
     logout(request)
-    return  HttpResponseRedirect(reverse('budget:welcome'))
+    return HttpResponseRedirect(reverse('budget:welcome'))
 
 
 # User settings main view and actions
 @login_required
 def user_settings(request):
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     if request.method == 'POST':
         form = AccountForm(request.POST)
         if form.is_valid():
@@ -144,8 +139,6 @@ class DeleteEnvelope (DeleteView):
 
 @login_required
 def account_view(request, user_account_id):
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     user_account = get_object_or_404(UserAccount, pk=user_account_id)
     context = {'user_account': user_account}
     return render(request, 'budgetApp/account-view.html', context)
@@ -153,8 +146,6 @@ def account_view(request, user_account_id):
 
 @login_required
 def account_settings(request, user_account_id):
-    if not request.user.is_authenticated:
-        return redirect('%s?next=%s' % (settings.LOGIN_URL, request.path))
     user_account = get_object_or_404(UserAccount, pk=user_account_id)
     envelopes = user_account.account.envelope_set.all()
     other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)
@@ -207,6 +198,6 @@ def history(request, user_account_id):
 def statistics(request, user_account_id):
     return HttpResponse("Got to statistics page. hurray!")
 
-
+@login_required
 def scheduled_transactions(request, user_account_id):
     return HttpResponse("Got to scheduled transactions page. hurray!")

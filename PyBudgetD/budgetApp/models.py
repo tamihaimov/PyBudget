@@ -42,6 +42,15 @@ class UserAccount (models.Model):
     def __str__(self):
         return "AccountId " + str(self.id)
 
+    PERMISSION_OWNER = 1
+    PERMISSION_USER = 2
+    PERMISSION_VIEWER = 3
+    PERMISSION_CHOICES = [
+        (PERMISSION_OWNER, 'owner'),
+        (PERMISSION_USER, 'user'),
+        (PERMISSION_VIEWER, 'viewer')
+    ]
+
 
 class Envelope (models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -52,6 +61,25 @@ class Envelope (models.Model):
 
     def __str__(self):
         return self.name
+
+    CATEGORY_FOOD = 1
+    CATEGORY_BILLS = 2
+    CATEGORY_TRANSPORT = 3
+    CATEGORY_HOUSING = 4
+    CATEGORY_HEALTH_CARE = 5
+    CATEGORY_SAVINGS = 6
+    CATEGORY_ENTERTAINMENT = 7
+    CATEGORY_MISC = 8
+    CATEGORY_CHOICES = [
+        (CATEGORY_FOOD, 'Food and Dining'),
+        (CATEGORY_BILLS, 'Bills and Utilities'),
+        (CATEGORY_TRANSPORT, 'Auto and Transportation'),
+        (CATEGORY_HOUSING, 'Housing'),
+        (CATEGORY_HEALTH_CARE, 'HealthCare'),
+        (CATEGORY_SAVINGS, 'Savings'),
+        (CATEGORY_ENTERTAINMENT, 'Entertainment'),
+        (CATEGORY_MISC, 'Miscellaneous'),
+    ]
 
 
 class Transaction (models.Model):
