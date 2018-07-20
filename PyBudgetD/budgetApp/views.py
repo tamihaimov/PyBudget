@@ -123,6 +123,32 @@ class AddEnvelope (CreateView):
         }
 
 
+class AddTransaction (CreateView):
+    form_class = AddTransactionForm
+    template_name = 'budgetApp/form.html'
+
+    def get_success_url(self):
+        return reverse('budget:welcome')
+
+    def get_initial(self):
+        account = get_object_or_404(Account, pk=self.kwargs['account_id'])
+        return {
+            'account': account,
+            'id_account': int(self.kwargs['account_id']),
+            'user': self.request.user,
+            'id_user': self.request.user.id,
+            'sum': 0
+        }
+
+    def get_context_data(self, **kwargs):
+        context = super(AddTransaction, self).get_context_data()
+        account = get_object_or_404(Account, pk=self.kwargs['account_id'])
+        context['header'] = 'Add Transaction To ' + account.name
+        return context
+    
+      
+
+
 class DeleteEnvelope (DeleteView):
     model = Envelope
     template_name = 'budgetApp/delete-form.html'
@@ -151,39 +177,6 @@ def account_settings(request, user_account_id):
     other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)
     context = {'user_account': user_account, 'envelopes': envelopes, 'other_users': other_users}
     return render(request, 'budgetApp/account-settings.html', context)
-
-
-@login_required
-def transaction(request, user_account_id):
-    user_account = get_object_or_404(UserAccount, pk=user_account_id)
-    envelopes = user_account.account.envelope_set.all()
-    other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)
-    context = {'user_account': user_account, 'envelopes': envelopes, 'other_users': other_users}
-    return render(request, 'budgetApp/transaction.html', context)
-
-
-@login_required
-def add_transaction(request, user_account_id):
-    user_account = get_object_or_404(UserAccount, pk=user_account_id)
-    try:
-        envelope = user_account.account.envelope_set.get(pk=request.POST['envelope'])
-    except {KeyError, Envelope.DoesNotExist}:
-        return render(request, 'budgetApp/transaction.html', {
-            'user_account': user_account,
-            'error_message': "Invalid envelope"
-        })
-    else:
-        transaction = Transaction.objects.create(account=user_account.account, user=user_account.user,
-                                                 envelope=envelope, date=request.POST['date'],
-                                                 type=int(request.POST['type']), description=request.POST['description'],
-                                                 sum=float(request.POST['sum']), comments=request.POST['comment'])
-        if transaction:
-            if transaction.type == 1:
-                envelope.current_sum -= transaction.sum
-            else:
-                envelope.current_sum += transaction.sum
-            envelope.save()
-    return HttpResponseRedirect(reverse('budget:welcome'))
 
 
 @login_required

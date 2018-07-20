@@ -6,7 +6,7 @@
 <hr>
 <ul>
     <li><a href="{% url 'budget:account_settings' user_account.id %}">Account Settings</a></li>
-    <li><a href="{% url 'budget:transaction' user_account.id %}">Add Transaction</a></li>
+    <li><a href="{% url 'budget:add-transaction' user_account.id %}">Add Transaction</a></li>
     <li><a href="{% url 'budget:history' user_account.id %}">View Transaction History</a></li>
     <li><a href="{% url 'budget:statistics' user_account.id %}">View Account Statistics</a></li>
     <li><a href="{% url 'budget:log-out' %}">Logout</a></li>

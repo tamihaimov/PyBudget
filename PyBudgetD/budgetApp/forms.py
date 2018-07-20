@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django import forms
 from django.forms import modelform_factory
 from .models import *
+from datetime import datetime
 
 
 # Creation Forms
@@ -34,11 +35,31 @@ class AddEnvelopeForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(AddEnvelopeForm, self).__init__(*args, **kwargs)
-        self.fields['account'].queryset = Account.objects.filter(pk= kwargs['initial']['id_account'])
+        self.fields['account'].queryset = Account.objects.filter(pk=kwargs['initial']['id_account'])
+
+
+class AddTransactionForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.SelectDateWidget(), initial=datetime.now())
+    comments = forms.CharField(required=False)
+
+    class Meta:
+        model = Transaction
+        fields = ('account', 'user', 'date', 'envelope', 'type', 'description', 'sum', 'comments')
+
+    def __init__(self, *args, **kwargs):
+        super(AddTransactionForm, self).__init__(*args, **kwargs)
+        self.fields['account'].queryset = Account.objects.filter(pk=kwargs['initial']['id_account'])
+        self.fields['account'].widget = forms.HiddenInput()
+        self.fields['user'].queryset = User.objects.filter(pk=kwargs['initial']['id_user'])
+        self.fields['user'].widget = forms.HiddenInput()
+
+    def save(self):
+        transaction = super(AddTransactionForm, self).save()
+        if transaction is not None:
+            transaction.update_envelope()
+        return transaction
 
 # Change Forms
-
-
 class ChangeUserInfoForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30)
     last_name = forms.CharField(max_length=150)
@@ -89,3 +110,6 @@ EnvelopeForm = modelform_factory(Envelope, fields=('account', 'category', 'name'
 
 
 UserAccountForm = modelform_factory(UserAccount, fields=('user', 'account', 'permission', 'is_default'))
+
+
+TransactionForm = modelform_factory(Transaction, fields=('date', 'envelope', 'type', 'description', 'sum', 'comments'))

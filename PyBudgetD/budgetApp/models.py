@@ -45,11 +45,11 @@ class UserAccount (models.Model):
     PERMISSION_OWNER = 1
     PERMISSION_USER = 2
     PERMISSION_VIEWER = 3
-    PERMISSION_CHOICES = [
+    PERMISSION_CHOICES = (
         (PERMISSION_OWNER, 'owner'),
         (PERMISSION_USER, 'user'),
         (PERMISSION_VIEWER, 'viewer')
-    ]
+    )
 
 
 class Envelope (models.Model):
@@ -70,7 +70,7 @@ class Envelope (models.Model):
     CATEGORY_SAVINGS = 6
     CATEGORY_ENTERTAINMENT = 7
     CATEGORY_MISC = 8
-    CATEGORY_CHOICES = [
+    CATEGORY_CHOICES = (
         (CATEGORY_FOOD, 'Food and Dining'),
         (CATEGORY_BILLS, 'Bills and Utilities'),
         (CATEGORY_TRANSPORT, 'Auto and Transportation'),
@@ -79,7 +79,7 @@ class Envelope (models.Model):
         (CATEGORY_SAVINGS, 'Savings'),
         (CATEGORY_ENTERTAINMENT, 'Entertainment'),
         (CATEGORY_MISC, 'Miscellaneous'),
-    ]
+    )
 
 
 class Transaction (models.Model):
@@ -87,7 +87,6 @@ class Transaction (models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     envelope = models.ForeignKey(Envelope, on_delete=models.CASCADE)
     date = models.DateTimeField()
-    type = models.IntegerField()
     description = models.CharField(max_length=200)
     sum = models.FloatField()
     comments = models.CharField(max_length=400)
@@ -95,11 +94,29 @@ class Transaction (models.Model):
     def __str__(self):
         return self.description + " " + str(self.sum)
 
-    def type_to_string (self):
-        if self.type == 1:
-            return "Expense"
-        return "Income"
+    TYPE_EXPENSE = 1
+    TYPE_INCOME = 2
+    TYPE_CHOICES = [
+        (TYPE_EXPENSE, "Expense"),
+        (TYPE_INCOME, "Income"),
+    ]
+    type = models.IntegerField(choices=TYPE_CHOICES, default=TYPE_EXPENSE)
+
+    def type_to_string(self):
+        for numeric_choice, string_choice in self.TYPE_CHOICES:
+            if numeric_choice == self.type:
+                return string_choice
+        return "unknown"
+
     type_str = property(type_to_string)
+
+    def update_envelope(self):
+        envelope = self.envelope
+        if self.type == self.TYPE_EXPENSE:
+            envelope.current_sum -= self.sum
+        else:
+            envelope.current_sum += self.sum
+        envelope.save()
 
 
 class ScheduledTransaction (models.Model):

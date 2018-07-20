@@ -15,8 +15,6 @@ urlpatterns = [
     path('account/<int:user_account_id>/', views.account_view, name='account_view'),
     # ex: /budget/account/1515/settings
     path('account/<int:user_account_id>/settings/', views.account_settings, name='account_settings'),
-    # ex: /budget/transaction/1515/
-    path('transaction/<int:user_account_id>/', views.transaction, name='transaction'),
     # ex: /budget/history/1515/
     path('history/<int:user_account_id>/', views.history, name='history'),
     # ex: /budget/statistics/1515/
@@ -39,8 +37,8 @@ urlpatterns += [
     path('add-envelope/<int:account_id>', views.AddEnvelope.as_view(), name='add-envelope'),
     # ex: /budget/delete-envelope/1515
     path('delete-envelope/<int:pk>', views.DeleteEnvelope.as_view(), name='delete-envelope'),
-    # ex: /budget/transaction/1515/
-    path('addTransaction/<int:user_account_id>/', views.add_transaction, name='add_transaction'),
+    # ex: /budget/add-transaction/1515/
+    path('add-transaction/<int:account_id>/', views.AddTransaction.as_view(), name='add-transaction'),
 ]
 
 
