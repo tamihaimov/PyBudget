@@ -13,8 +13,9 @@ from django.views.generic.edit import UpdateView, CreateView, DeleteView
 @login_required
 def welcome(request):
     user = request.user
-    default_account = UserAccount.objects.filter(user_id=user.id, is_default=True)
-    context = {'user': user, 'default_account': default_account}
+    default_account = UserAccount.objects.filter(user_id=user.id, is_default=True).first()
+    envelopes = default_account.account.envelope_set.all()
+    context = {'user': user, 'account': default_account, 'envelopes': envelopes}
     return render(request, 'budgetApp/welcome.html', context)
 
 
@@ -75,7 +76,17 @@ class ChangeUserInfo(UpdateView):
         return self.request.user
 
 
-# Account settings and actions view
+# Account settings and actions views
+
+@login_required
+def account_settings(request, user_account_id):
+    user_account = get_object_or_404(UserAccount, pk=user_account_id)
+    envelopes = user_account.account.envelope_set.all()
+    other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)
+    context = {'user_account': user_account, 'envelopes': envelopes, 'other_users': other_users}
+    return render(request, 'budgetApp/account-settings.html', context)
+
+
 class ChangeAccountInfo (UpdateView):
     model = Account
     template_name = 'budgetApp/form.html'
@@ -123,6 +134,49 @@ class AddEnvelope (CreateView):
         }
 
 
+class DeleteEnvelope (DeleteView):
+    model = Envelope
+    template_name = 'budgetApp/delete-form.html'
+
+    def get_success_url(self):
+        user_account = UserAccount.objects.filter(user=self.request.user, account_id=self.object.account_id).first()
+        return reverse('budget:account_settings', kwargs={'user_account_id': user_account.id})
+
+    def get_context_data(self, **kwargs):
+        context = super(DeleteEnvelope, self).get_context_data()
+        context['object_type'] = 'Envelope'
+        return context
+
+
+# Budget views
+
+@login_required
+def account_view(request, user_account_id):
+    user_account = get_object_or_404(UserAccount, pk=user_account_id)
+    context = {'user_account': user_account}
+    return render(request, 'budgetApp/account-view.html', context)
+
+
+@login_required
+def history(request, user_account_id):
+    user_account = get_object_or_404(UserAccount, pk=user_account_id)
+    transactions = user_account.account.transaction_set.order_by('date').all()
+    context = {'user_account': user_account, 'transactions': transactions}
+    return render(request, 'budgetApp/history.html', context)
+
+
+@login_required
+def statistics(request, user_account_id):
+    return HttpResponse("Got to statistics page. hurray!")
+
+
+@login_required
+def scheduled_transactions(request, user_account_id):
+    return HttpResponse("Got to scheduled transactions page. hurray!")
+
+
+# Budget actions
+
 class AddTransaction (CreateView):
     form_class = AddTransactionForm
     template_name = 'budgetApp/form.html'
@@ -145,52 +199,9 @@ class AddTransaction (CreateView):
         account = get_object_or_404(Account, pk=self.kwargs['account_id'])
         context['header'] = 'Add Transaction To ' + account.name
         return context
-    
-      
 
 
-class DeleteEnvelope (DeleteView):
-    model = Envelope
-    template_name = 'budgetApp/delete-form.html'
-
-    def get_success_url(self):
-        user_account = UserAccount.objects.filter(user=self.request.user, account_id=self.object.account_id).first()
-        return reverse('budget:account_settings', kwargs={'user_account_id': user_account.id})
-
-    def get_context_data(self, **kwargs):
-        context = super(DeleteEnvelope, self).get_context_data()
-        context['object_type'] = 'Envelope'
-        return context
 
 
-@login_required
-def account_view(request, user_account_id):
-    user_account = get_object_or_404(UserAccount, pk=user_account_id)
-    context = {'user_account': user_account}
-    return render(request, 'budgetApp/account-view.html', context)
 
 
-@login_required
-def account_settings(request, user_account_id):
-    user_account = get_object_or_404(UserAccount, pk=user_account_id)
-    envelopes = user_account.account.envelope_set.all()
-    other_users = UserAccount.objects.filter(account=user_account.account).exclude(id=user_account_id)
-    context = {'user_account': user_account, 'envelopes': envelopes, 'other_users': other_users}
-    return render(request, 'budgetApp/account-settings.html', context)
-
-
-@login_required
-def history(request, user_account_id):
-    user_account = get_object_or_404(UserAccount, pk=user_account_id)
-    transactions = user_account.account.transaction_set.order_by('date').all()
-    context = {'user_account': user_account, 'transactions': transactions}
-    return render(request, 'budgetApp/history.html', context)
-
-
-@login_required
-def statistics(request, user_account_id):
-    return HttpResponse("Got to statistics page. hurray!")
-
-@login_required
-def scheduled_transactions(request, user_account_id):
-    return HttpResponse("Got to scheduled transactions page. hurray!")

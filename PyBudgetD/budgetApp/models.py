@@ -81,6 +81,9 @@ class Envelope (models.Model):
         (CATEGORY_MISC, 'Miscellaneous'),
     )
 
+    def check_sufficient_funds(self, sum):
+        return self.current_sum >= sum
+
 
 class Transaction (models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)

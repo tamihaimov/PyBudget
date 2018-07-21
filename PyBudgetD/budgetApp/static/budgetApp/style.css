@@ -1,0 +1,15 @@
+li a {
+    color: blue;
+}
+
+th, td {
+    padding: 5px;
+}
+
+th {
+    text-align: left;
+}
+
+/*body {*/
+    /*background: white url("images/background.gif")*/
+/*}*/

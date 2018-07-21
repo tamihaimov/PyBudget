@@ -1,4 +1,7 @@
 
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'budgetApp/style.css' %}" />
+
 <b>{{ user_account.account }}</b>
 <p>Budget: {{ user_account.account.budget }} </p>
 <p>Balance: {{ user_account.account.balance }} </p>

@@ -1,19 +1,37 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'budgetApp/style.css' %}" />
 
-<b> Hello {{ user.first_name }}!</b>
+<h1> Hello {{ user.first_name }}!</h1>
 <hr>
-{% if default_account %}
-  {% for account in default_account %}
-   <b>{{ account.account }}</b>
+{% if account %}
+   <h2>{{ account.account }}</h2>
       <p>Budget: {{ account.account.budget }} </p>
       <p>Balance: {{ account.account.balance }} </p>
       <p>Reset Day: {{ account.account.reset_date }} </p>
+      <hr>
+      <h2>Envelopes:</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Budget</th>
+                <th>Current Balance</th>
+            </tr>
+            {% for envelope in envelopes %}
+                <tr>
+                    <td>{{ envelope.name }}</td>
+                    <td>{{ envelope.category }}</td>
+                    <td>{{ envelope.budget }}</td>
+                    <td>{{ envelope.current_sum }}</td>
+                </tr>
+            {% endfor %}
+         </table>
       <hr>
       <ul>
           <li><a href="{% url 'budget:add-transaction' account.id %}">Add Transaction</a></li>
           <li><a href="{% url 'budget:history' account.id %}">View Transaction History</a></li>
           <li><a href="{% url 'budget:statistics' account.id %}">View Account Statistics</a></li>
       </ul>
-   {% endfor %}
 {% else %}
     <p>No default account</p>
 {% endif %}

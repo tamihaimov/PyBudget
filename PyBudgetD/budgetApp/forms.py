@@ -3,6 +3,7 @@ from django import forms
 from django.forms import modelform_factory
 from .models import *
 from datetime import datetime
+from django.core import exceptions
 
 
 # Creation Forms
@@ -58,6 +59,22 @@ class AddTransactionForm(forms.ModelForm):
         if transaction is not None:
             transaction.update_envelope()
         return transaction
+    
+    def is_valid(self):
+        if super(AddTransactionForm, self).is_valid():
+            if self.fields['type'] == Transaction.TYPE_INCOME:
+                return True
+            envelope = self.cleaned_data['envelope']
+            transaction_sum = self.cleaned_data['sum']
+            if transaction_sum <= 0:
+                self.add_error('sum', exceptions.ValidationError)
+                return False
+            if envelope.check_sufficient_funds(transaction_sum):
+                return True
+            else:
+                self.add_error('sum', exceptions.ValidationError)
+        return False
+        
 
 # Change Forms
 class ChangeUserInfoForm(forms.ModelForm):
