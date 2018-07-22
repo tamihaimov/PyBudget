@@ -12,15 +12,15 @@ urlpatterns = [
     # ex: /budget/settings/
     path('settings/', views.user_settings, name='user_settings'),
     # ex: /budget/account/1515/
-    path('account/<int:user_account_id>/', views.account_view, name='account_view'),
+    path('account/<int:user_budget_id>/', views.budget_view, name='budget_view'),
     # ex: /budget/account/1515/settings
-    path('account/<int:user_account_id>/settings/', views.account_settings, name='account_settings'),
+    path('account/<int:user_budget_id>/settings/', views.budget_settings, name='budget_settings'),
     # ex: /budget/history/1515/
-    path('history/<int:user_account_id>/', views.history, name='history'),
+    path('history/<int:user_budget_id>/', views.history, name='history'),
     # ex: /budget/statistics/1515/
-    path('statistics/<int:user_account_id>/', views.statistics, name='statistics'),
+    path('statistics/<int:user_budget_id>/', views.statistics, name='statistics'),
     # ex: /budget/scheduled/1515/
-    path('scheduled/<int:user_account_id>/', views.scheduled_transactions, name='scheduled'),
+    path('scheduled/<int:user_budget_id>/', views.scheduled_transactions, name='scheduled'),
 ]
 
 # Actions
@@ -29,16 +29,16 @@ urlpatterns += [
     path('sign_up/', views.sign_up, name='sign_up'),
     # ex: /budget/change-user-info/
     path('change-user-info/', views.ChangeUserInfo.as_view(), name='change_user_info'),
-    # ex: /budget/change-account-info/1515
-    path('change-account-info/<int:pk>', views.ChangeAccountInfo.as_view(), name='change_account_info'),
+    # ex: /budget/change-budget-info/1515
+    path('change-budget-info/<int:pk>', views.ChangeBudgetInfo.as_view(), name='change_budget_info'),
     # ex: /budget/change-envelope-info/1515
     path('change-envelope-info/<int:pk>', views.ChangeEnvelopeInfo.as_view(), name='change_envelope_info'),
     # ex: /budget/add-envelope/1515
-    path('add-envelope/<int:account_id>', views.AddEnvelope.as_view(), name='add-envelope'),
+    path('add-envelope/<int:budget_id>', views.AddEnvelope.as_view(), name='add-envelope'),
     # ex: /budget/delete-envelope/1515
     path('delete-envelope/<int:pk>', views.DeleteEnvelope.as_view(), name='delete-envelope'),
     # ex: /budget/add-transaction/1515/
-    path('add-transaction/<int:account_id>/', views.AddTransaction.as_view(), name='add-transaction'),
+    path('add-transaction/<int:budget_id>/', views.AddTransaction.as_view(), name='add-transaction'),
 ]
 
 

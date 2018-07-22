@@ -3,11 +3,12 @@
 
 <h1> Hello {{ user.first_name }}!</h1>
 <hr>
-{% if account %}
-   <h2>{{ account.account }}</h2>
-      <p>Budget: {{ account.account.budget }} </p>
-      <p>Balance: {{ account.account.balance }} </p>
-      <p>Reset Day: {{ account.account.reset_date }} </p>
+{% if user_budget %}
+   <h2>{{ user_budget.budget }}</h2>
+      <p>Budget Account: {{ user_budget.budget.budget }} </p>
+      <p>Balance: {{ user_budget.budget.balance }} </p>
+      <p>Reset Date: {{ user_budget.budget.next_reset_date }} </p>
+      <p>Days Until Reset: {{ user_budget.budget.countdown_to_reset }} </p>
       <hr>
       <h2>Envelopes:</h2>
         <table>
@@ -17,10 +18,10 @@
                 <th>Budget</th>
                 <th>Current Balance</th>
             </tr>
-            {% for envelope in envelopes %}
+            {% for envelope in user_budget.budget.envelopes %}
                 <tr>
                     <td>{{ envelope.name }}</td>
-                    <td>{{ envelope.category }}</td>
+                    <td>{{ envelope.get_category_display }}</td>
                     <td>{{ envelope.budget }}</td>
                     <td>{{ envelope.current_sum }}</td>
                 </tr>
@@ -28,9 +29,9 @@
          </table>
       <hr>
       <ul>
-          <li><a href="{% url 'budget:add-transaction' account.id %}">Add Transaction</a></li>
-          <li><a href="{% url 'budget:history' account.id %}">View Transaction History</a></li>
-          <li><a href="{% url 'budget:statistics' account.id %}">View Account Statistics</a></li>
+          <li><a href="{% url 'budget:add-transaction' user_budget.id %}">Add Transaction</a></li>
+          <li><a href="{% url 'budget:history' user_budget.id %}">View Transaction History</a></li>
+          <li><a href="{% url 'budget:statistics' user_budget.id %}">View Budget Statistics</a></li>
       </ul>
 {% else %}
     <p>No default account</p>

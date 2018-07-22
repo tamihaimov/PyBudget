@@ -5,7 +5,7 @@
 <head>
 </head>
 <body>
-<h2>Transaction History For Account: {{ user_account.account }} </h2>
+<h2>Transaction History For Budget Account: {{ user_budget.budget }} </h2>
 
 <table style="width:100%">
     <th>Date</th>
@@ -19,10 +19,10 @@
         </tr>
         {% for transaction in transactions %}
             <tr>
-                <td>{{ transaction.date.date }}</td>
+                <td>{{ transaction.date }}</td>
                 <td>{{ transaction.user.first_name}} {{ transaction.user.last_name }}</td>
                 <td>{{ transaction.envelope }}</td>
-                <td>{{ transaction.envelope.category }}</td>
+                <td>{{ transaction.envelope.get_category_display }}</td>
                 <td>{{ transaction.type_str }}</td>
                 <td>{{ transaction.description }}</td>
                 <td>{{ transaction.sum }}</td>
