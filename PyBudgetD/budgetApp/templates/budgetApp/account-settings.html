@@ -1,27 +1,25 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'budgetApp/style.css' %}" />
 
 <head>
-<style>
-th, td {
-    padding: 5px;
-}
-th {
-    text-align: left;
-}
-</style>
 </head>
 
 <body>
-    <h1>Account Settings</h1>
-    <h2>Account Information</h2>
-    {% if user_account %}
-        <p>Name: {{  user_account.account }} </p>
-        <p>Budget: {{ user_account.account.budget }} </p>
-        <p>Current Balance: {{ user_account.account.balance }} </p>
-        <p>Reset Day: {{ user_account.account.reset_date }} </p>
-        <a href="{% url 'budget:change_account_info' user_account.account.id %}">Edit Account</a>
+    <h1>Budget Account Settings</h1>
+    <h2>Budget Information</h2>
+    {% if user_budget %}
+        <p>Name: {{  user_budget.budget }} </p>
+        <p>Budget: {{ user_budget.budget.budget }} </p>
+        <p>Current Balance: {{ user_budget.budget.balance }} </p>
+        <p>Reset Date: {{ user_budget.budget.next_reset_date }} </p>
+        <p>Days Until Reset: {{ user_budget.budget.countdown_to_reset }} </p>
+        {% if user_budget.permission == user_budget.PERMISSION_OWNER %}
+            <a href="{% url 'budget:change_budget_info' user_budget.budget.id %}">Edit Budget Account</a>
+        {% endif %}
         <hr>
         <h2>Envelopes</h2>
         <table>
+            <tr>
                 <th>Name</th>
                 <th>Category</th>
                 <th>Budget</th>
@@ -31,10 +29,10 @@ th {
             {% for envelope in envelopes %}
                 <tr>
                     <td>{{ envelope.name }}</td>
-                    <td>{{ envelope.category }}</td>
+                    <td>{{ envelope.get_category_display }}</td>
                     <td>{{ envelope.budget }}</td>
                     <td>{{ envelope.current_sum }}</td>
-                    {% if user_account.permission.id == 1 %}
+                    {% if user_budget.permission == user_budget.PERMISSION_OWNER %}
                         <td>
                             <a href="{% url 'budget:change_envelope_info' envelope.id %}">Edit</a>
                             <a href="{% url 'budget:delete-envelope' envelope.id %}">Delete</a>
@@ -45,28 +43,29 @@ th {
                 </tr>
         {% endfor %}
         </table>
-        {% if user_account.permission.id == 1 %}
-            <a href="{% url 'budget:add-envelope' user_account.account.id %}">Add Envelope</a>
+        {% if user_budget.permission == user_budget.PERMISSION_OWNER %}
+            <a href="{% url 'budget:add-envelope' user_budget.budget.id %}">Add Envelope</a>
         {% endif %}
         <hr>
         <h2>Associated Users</h2>
-        {% if user_account.permission.id == 1 %}
+        {% if user_budget.permission == user_budget.PERMISSION_OWNER %}
             <table>
-                <th>User Name</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Permission</th>
-                <th>Actions</th>
-            </tr>
-            {% for user in other_users %}
                 <tr>
-                    <td>{{ user.user.email }}</td>
-                    <td>{{ user.user.first_name }}</td>
-                    <td>{{ user.user.last_name }}</td>
-                    <td>{{ user.permission }}</td>
-                    <td> </td>
+                    <th>User Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Permission</th>
+                    <th>Actions</th>
                 </tr>
-            {% endfor %}
+                {% for user in other_users %}
+                    <tr>
+                        <td>{{ user.user.email }}</td>
+                        <td>{{ user.user.first_name }}</td>
+                        <td>{{ user.user.last_name }}</td>
+                        <td>{{ user.permission_str }}</td>
+                        <td> </td>
+                    </tr>
+                {% endfor %}
             </table>
 
         {% else %}
@@ -74,7 +73,7 @@ th {
         {% endif %}
 
     {% else %}
-        <p>No account found</p>
+        <p>No budget account found</p>
     {% endif %}
     <p><a href="{% url 'budget:log-out' %}">Logout</a></p>
 </body>

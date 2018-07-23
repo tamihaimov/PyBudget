@@ -1,0 +1,18 @@
+
+a {
+    color: blue; font-weight: bold;
+}
+
+th, td {
+    padding: 5px;
+}
+
+th {
+    text-align: left;
+}
+
+body {
+    background: lightblue url("images/ba4.png");
+    background-size: cover;
+}
+

@@ -1,12 +1,7 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'budgetApp/style.css' %}" />
+
 <head>
-<style>
-th, td {
-    padding: 5px;
-}
-th {
-    text-align: left;
-}
-</style>
 </head>
 
 <body>
@@ -18,44 +13,44 @@ th {
     <p>Last Name: {{ user.last_name }} </p>
     <a href="{% url 'budget:change_user_info' %}">Change User Info</a>
      {% if default_account.is_default %}
-          <p>Default Account: {{ default_account.account }} </p>
+          <p>Default Budget: {{ default_account.budget }} </p>
      {% else %}
-         <p>No default account </p>
+         <p>No default budget </p>
      {% endif %}
     <hr>
-    <b>Accounts</b>
+    <b>Budgets</b>
     <table>
         <tr>
-            <th>Account</th>
+            <th>Budget Name</th>
             <th>Permission</th>
             <th>Balance</th>
             <th>Actions</th>
         </tr>
-        {% for account in accounts %}
-            <tr>
-                <td>{{ account.account }}</td>
-                <td>{{ account.permission}}</td>
-                <td>{{ account.account.balance}}</td>
-                <td>
-                    {% if account.permission.id == 1 %}
-                        <a href="{% url 'budget:account_settings' account.id %}">Edit</a>
-                    {% endif %}
-                    <a href="{% url 'budget:account_view' account.id %}">View</a>
-                </td>
+        {% for user_budget in user_budgets %}
+            {% if user_budget.budget.is_inactive is False %}
+                <tr>
+                    <td>{{ user_budget.budget }}</td>
+                    <td>{{ user_budget.permission_to_string}}</td>
+                    <td>{{ user_budget.budget.balance}}</td>
+                    <td>
+                        {% if user_budget.permission == 1 %}
+                            <a href="{% url 'budget:budget_settings' user_budget.id %}">Edit</a>
+                        {% endif %}
+                        <a href="{% url 'budget:budget_view' user_budget.id %}">View</a>
+                    </td>
 
-            </tr>
+                </tr>
+            {% endif %}
     {% endfor %}
     </table>
     <hr>
-    <b>Create New Account</b>
+    <b>Create New Budget</b>
     <form method="post">
         {% csrf_token %}
         <p><label>Name:</label>
         <input type="text" name="name" id="name"/></p>
-         <p><label>Budget:</label>
-        <input type="number" name="budget" id="budget"/></p>
-         <p><label>Reset Date:</label>
-        <input type="number" name="reset_date" id="reset_date"/></p>
+         <p><label>Reset Day:</label>
+        <input type="number" name="reset_day" id="reset_day"/></p>
         <input type="submit" value="Save" />
     </form>
 {% else %}

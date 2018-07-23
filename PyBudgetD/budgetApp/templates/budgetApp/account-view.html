@@ -1,13 +1,16 @@
 
-<b>{{ user_account.account }}</b>
-<p>Budget: {{ user_account.account.budget }} </p>
-<p>Balance: {{ user_account.account.balance }} </p>
-<p>Reset Day: {{ user_account.account.reset_date }} </p>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'budgetApp/style.css' %}" />
+
+<b>{{ user_account.budget }}</b>
+<p>Budget Account: {{ user_account.budget.budget }} </p>
+<p>Balance: {{ user_account.budget.balance }} </p>
+<p>Reset Day: {{ user_account.budget.reset_day }} </p>
 <hr>
 <ul>
-    <li><a href="{% url 'budget:account_settings' user_account.id %}">Account Settings</a></li>
-    <li><a href="{% url 'budget:transaction' user_account.id %}">Add Transaction</a></li>
+    <li><a href="{% url 'budget:budget_settings' user_account.id %}">Budget Settings</a></li>
+    <li><a href="{% url 'budget:add-transaction' user_account.id %}">Add Transaction</a></li>
     <li><a href="{% url 'budget:history' user_account.id %}">View Transaction History</a></li>
-    <li><a href="{% url 'budget:statistics' user_account.id %}">View Account Statistics</a></li>
+    <li><a href="{% url 'budget:statistics' user_account.id %}">View Budget Statistics</a></li>
     <li><a href="{% url 'budget:log-out' %}">Logout</a></li>
 </ul>

@@ -1,22 +1,43 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'budgetApp/style.css' %}" />
+<head></head>
+<body>
+    <h1> Hello {{ user.first_name }}!</h1>
+    <hr>
+    {% if user_budget %}
+       <h2>{{ user_budget.budget }}</h2>
+          <p>Budget Account: {{ user_budget.budget.budget }} </p>
+          <p>Balance: {{ user_budget.budget.balance }} </p>
+          <p>Reset Date: {{ user_budget.budget.next_reset_date }} </p>
+          <p>Days Until Reset: {{ user_budget.budget.countdown_to_reset }} </p>
+          <hr>
+          <h2>Envelopes:</h2>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Budget</th>
+                    <th>Current Balance</th>
+                </tr>
+                {% for envelope in user_budget.budget.envelopes %}
+                    <tr>
+                        <td>{{ envelope.name }}</td>
+                        <td>{{ envelope.get_category_display }}</td>
+                        <td>{{ envelope.budget }}</td>
+                        <td>{{ envelope.current_sum }}</td>
+                    </tr>
+                {% endfor %}
+             </table>
+          <hr>
+          <ul>
+              <li><a href="{% url 'budget:add-transaction' user_budget.id %}">Add Transaction</a></li>
+              <li><a href="{% url 'budget:history' user_budget.id %}">View Transaction History</a></li>
+              <li><a href="{% url 'budget:statistics' user_budget.id %}">View Budget Statistics</a></li>
+          </ul>
+    {% else %}
+        <p>No default account</p>
+    {% endif %}
+    <p><a href="{% url 'budget:user_settings' %}">Settings</a><br/>
+    <a href="{% url 'budget:log-out' %}">Logout</a></p>
 
-<b> Hello {{ user.first_name }}!</b>
-<hr>
-{% if default_account %}
-  {% for account in default_account %}
-   <b>{{ account.account }}</b>
-      <p>Budget: {{ account.account.budget }} </p>
-      <p>Balance: {{ account.account.balance }} </p>
-      <p>Reset Day: {{ account.account.reset_date }} </p>
-      <hr>
-      <ul>
-          <li><a href="{% url 'budget:transaction' account.id %}">Add Transaction</a></li>
-          <li><a href="{% url 'budget:history' account.id %}">View Transaction History</a></li>
-          <li><a href="{% url 'budget:statistics' account.id %}">View Account Statistics</a></li>
-      </ul>
-   {% endfor %}
-{% else %}
-    <p>No default account</p>
-{% endif %}
-<p><a href="{% url 'budget:user_settings' %}">Settings</a><br/>
-<a href="{% url 'budget:log-out' %}">Logout</a></p>
-
+</body>

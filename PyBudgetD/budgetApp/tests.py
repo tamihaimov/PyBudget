@@ -39,3 +39,16 @@ class TestLogin(TestCase):
         self.assertEqual(response.status_code, 302)  # get authentication error
 
 
+class TestTransaction(TestCase):
+    """
+    tests precondition and post save actions for transaction addition
+    """
+
+    def test_precondition_invalid_transaction(self):
+        pass
+
+    def test_precondition_valid_transaction(self):
+        pass
+
+    def test_envelope_update(self):
+        pass
