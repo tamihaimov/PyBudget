@@ -125,3 +125,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = (
+    # I have the static folder inside my app and not inside the project
+    os.path.join(BASE_DIR, 'budgetApp/static'),
+)
